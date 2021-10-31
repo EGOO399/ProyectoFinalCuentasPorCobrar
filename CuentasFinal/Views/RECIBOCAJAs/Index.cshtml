@@ -1,0 +1,45 @@
+﻿@model IEnumerable<CuentasFinal.Models.RECIBOCAJA>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<img src="~/Scripts/logo.jpg" width="200">
+
+<p>
+    @Html.ActionLink("Nuevo Recibo", "Create")
+</p>
+<table class="table  table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Monto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ABONO.IdAbono)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Monto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fecha)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ABONO.IdAbono)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.IdRecibo }) |
+            @Html.ActionLink("Detalles", "Details", new { id=item.IdRecibo }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.IdRecibo })
+        </td>
+    </tr>
+}
+
+</table>

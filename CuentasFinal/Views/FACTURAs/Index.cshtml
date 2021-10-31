@@ -1,0 +1,51 @@
+﻿@model IEnumerable<CuentasFinal.Models.FACTURA>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<img src="~/Scripts/logo.jpg" width="200">
+
+<p>
+    @Html.ActionLink("Nueva Factura", "Create")
+</p>
+<table class="table table-dark table-hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Total)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CLIENTE.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TIPOPAGO.TipoPago1)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fecha)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Total)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CLIENTE.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TIPOPAGO.TipoPago1)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.IdFactura }) |
+            @Html.ActionLink("Detalles", "Details", new { id=item.IdFactura }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.IdFactura })
+        </td>
+    </tr>
+}
+
+</table>

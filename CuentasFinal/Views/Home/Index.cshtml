@@ -1,0 +1,44 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<img src="~/Scripts/logo.jpg" width="200">
+<div class="jumbotron " >
+    <h1>Proyecto Cuentas por Cobrar</h1>
+    <p class="lead">Proyecto de Desarrollo Web</p>
+  
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2> @Html.ActionLink("Tipo Cliente", "Index", "TIPOCLIENTEs")</h2>
+        <p>
+          
+        </p>
+        <p></p>
+    </div>
+    <div class="col-md-4">
+        <h2> @Html.ActionLink("Tipo Pago", "Index", "TIPOPAGOes")</h2>
+         <p></p>
+    </div>
+    <div class="col-md-4">
+        <h2> @Html.ActionLink("Producto", "Index", "PRODUCTOes")</h2>
+        </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2> @Html.ActionLink("Registrar Usuarios", "Index", "USUARIOs")</h2>
+        <p>
+
+        </p>
+    </div>
+    <div class="col-md-4">
+        <h2> @Html.ActionLink("Registar estados De Prestamos", "Index", "ESTADOCREDITOes")</h2>
+        <p>
+
+        </p>
+    </div>
+
+
+</div>

@@ -1,0 +1,50 @@
+﻿@model CuentasFinal.Models.CLIENTE
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Detalles del Cliente</h2>
+
+<div>
+    <h4>CLIENTE</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Telefono)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Telefono)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TIPOCLIENTE.TipoCliente1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TIPOCLIENTE.TipoCliente1)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.IdCliente }) |
+    @Html.ActionLink("Regresar", "Index")
+</p>

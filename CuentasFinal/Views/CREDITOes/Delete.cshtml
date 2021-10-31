@@ -1,0 +1,56 @@
+﻿@model CuentasFinal.Models.CREDITO
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Eliminar</h2>
+
+<h3>Estas seguro de Eliminar el Credito?</h3>
+<div>
+    <h4>CREDITO</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Detalle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Detalle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fecha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CLIENTE.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CLIENTE.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ESTADOCREDITO.Estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ESTADOCREDITO.Estado)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+            @Html.ActionLink("Regresar", "Index")
+        </div>
+    }
+</div>

@@ -1,0 +1,912 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="pruebaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ABONO">
+          <Key>
+            <PropertyRef Name="IdAbono" />
+          </Key>
+          <Property Name="IdAbono" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Monto" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Fecha" Type="datetime" />
+          <Property Name="IdCredito" Type="int" />
+          <Property Name="IdFactura" Type="int" />
+        </EntityType>
+        <EntityType Name="CLIENTE">
+          <Key>
+            <PropertyRef Name="IdCliente" />
+          </Key>
+          <Property Name="IdCliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="Telefono" Type="int" />
+          <Property Name="Nit" Type="int" />
+          <Property Name="IdTipoCliente" Type="int" />
+        </EntityType>
+        <EntityType Name="CREDITO">
+          <Key>
+            <PropertyRef Name="IdCredito" />
+          </Key>
+          <Property Name="IdCredito" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdEstado" Type="int" />
+          <Property Name="Detalle" Type="varchar" MaxLength="100" />
+          <Property Name="Fecha" Type="datetime" />
+          <Property Name="IdCliente" Type="int" />
+        </EntityType>
+        <EntityType Name="DETALLEFACTURA">
+          <Key>
+            <PropertyRef Name="IdDetalle" />
+          </Key>
+          <Property Name="IdDetalle" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdFactura" Type="int" />
+          <Property Name="IdProducto" Type="int" />
+          <Property Name="CantidadProducto" Type="int" />
+        </EntityType>
+        <EntityType Name="ESTADOCREDITO">
+          <Key>
+            <PropertyRef Name="IdEstado" />
+          </Key>
+          <Property Name="IdEstado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Estado" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="FACTURA">
+          <Key>
+            <PropertyRef Name="IdFactura" />
+          </Key>
+          <Property Name="IdFactura" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdTipoPago" Type="int" />
+          <Property Name="Fecha" Type="datetime" />
+          <Property Name="Total" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="IdCliente" Type="int" />
+        </EntityType>
+        <EntityType Name="MONTOCREDITO">
+          <Key>
+            <PropertyRef Name="IdMonto" />
+          </Key>
+          <Property Name="IdMonto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Monto" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="IdCredito" Type="int" />
+        </EntityType>
+        <EntityType Name="PRODUCTO">
+          <Key>
+            <PropertyRef Name="IdProducto" />
+          </Key>
+          <Property Name="IdProducto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="Cantidad" Type="int" />
+          <Property Name="Precio" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="RECIBOCAJA">
+          <Key>
+            <PropertyRef Name="IdRecibo" />
+          </Key>
+          <Property Name="IdRecibo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Monto" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Fecha" Type="datetime" />
+          <Property Name="IdAbono" Type="int" />
+        </EntityType>
+        <EntityType Name="SALDO">
+          <Key>
+            <PropertyRef Name="IdSaldo" />
+          </Key>
+          <Property Name="IdSaldo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Monto" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="IdMonto" Type="int" />
+          <Property Name="IdFactura" Type="int" />
+          <Property Name="IdAbono" Type="int" />
+        </EntityType>
+        <EntityType Name="TIPOCLIENTE">
+          <Key>
+            <PropertyRef Name="IdTipoCliente" />
+          </Key>
+          <Property Name="IdTipoCliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TipoCliente" Type="varchar" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="TIPOPAGO">
+          <Key>
+            <PropertyRef Name="IdTipoPago" />
+          </Key>
+          <Property Name="IdTipoPago" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TipoPago" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="USUARIO">
+          <Key>
+            <PropertyRef Name="IdUser" />
+          </Key>
+          <Property Name="IdUser" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="Telefono" Type="int" />
+          <Property Name="Puesto" Type="varchar" MaxLength="25" />
+          <Property Name="UserName" Type="varchar" MaxLength="20" />
+          <Property Name="Password" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <Association Name="FK__ABONO__IdCredito__4316F928">
+          <End Role="CREDITO" Type="Self.CREDITO" Multiplicity="0..1" />
+          <End Role="ABONO" Type="Self.ABONO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CREDITO">
+              <PropertyRef Name="IdCredito" />
+            </Principal>
+            <Dependent Role="ABONO">
+              <PropertyRef Name="IdCredito" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ABONO__IdFactura__440B1D61">
+          <End Role="FACTURA" Type="Self.FACTURA" Multiplicity="0..1" />
+          <End Role="ABONO" Type="Self.ABONO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FACTURA">
+              <PropertyRef Name="IdFactura" />
+            </Principal>
+            <Dependent Role="ABONO">
+              <PropertyRef Name="IdFactura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CLIENTE__IdTipoC__3B75D760">
+          <End Role="TIPOCLIENTE" Type="Self.TIPOCLIENTE" Multiplicity="0..1" />
+          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPOCLIENTE">
+              <PropertyRef Name="IdTipoCliente" />
+            </Principal>
+            <Dependent Role="CLIENTE">
+              <PropertyRef Name="IdTipoCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CREDITO__IdClien__412EB0B6">
+          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="0..1" />
+          <End Role="CREDITO" Type="Self.CREDITO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="CREDITO">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CREDITO__IdEstad__403A8C7D">
+          <End Role="ESTADOCREDITO" Type="Self.ESTADOCREDITO" Multiplicity="0..1" />
+          <End Role="CREDITO" Type="Self.CREDITO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTADOCREDITO">
+              <PropertyRef Name="IdEstado" />
+            </Principal>
+            <Dependent Role="CREDITO">
+              <PropertyRef Name="IdEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DETALLEFA__IdFac__3E52440B">
+          <End Role="FACTURA" Type="Self.FACTURA" Multiplicity="0..1" />
+          <End Role="DETALLEFACTURA" Type="Self.DETALLEFACTURA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FACTURA">
+              <PropertyRef Name="IdFactura" />
+            </Principal>
+            <Dependent Role="DETALLEFACTURA">
+              <PropertyRef Name="IdFactura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DETALLEFA__IdPro__3F466844">
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="0..1" />
+          <End Role="DETALLEFACTURA" Type="Self.DETALLEFACTURA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTO">
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="DETALLEFACTURA">
+              <PropertyRef Name="IdProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FACTURA__IdClien__3D5E1FD2">
+          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="0..1" />
+          <End Role="FACTURA" Type="Self.FACTURA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="FACTURA">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FACTURA__IdTipoP__3C69FB99">
+          <End Role="TIPOPAGO" Type="Self.TIPOPAGO" Multiplicity="0..1" />
+          <End Role="FACTURA" Type="Self.FACTURA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPOPAGO">
+              <PropertyRef Name="IdTipoPago" />
+            </Principal>
+            <Dependent Role="FACTURA">
+              <PropertyRef Name="IdTipoPago" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MONTOCRED__IdCre__4222D4EF">
+          <End Role="CREDITO" Type="Self.CREDITO" Multiplicity="0..1" />
+          <End Role="MONTOCREDITO" Type="Self.MONTOCREDITO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CREDITO">
+              <PropertyRef Name="IdCredito" />
+            </Principal>
+            <Dependent Role="MONTOCREDITO">
+              <PropertyRef Name="IdCredito" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RECIBOCAJ__IdAbo__47DBAE45">
+          <End Role="ABONO" Type="Self.ABONO" Multiplicity="0..1" />
+          <End Role="RECIBOCAJA" Type="Self.RECIBOCAJA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ABONO">
+              <PropertyRef Name="IdAbono" />
+            </Principal>
+            <Dependent Role="RECIBOCAJA">
+              <PropertyRef Name="IdAbono" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SALDO__IdAbono__46E78A0C">
+          <End Role="ABONO" Type="Self.ABONO" Multiplicity="0..1" />
+          <End Role="SALDO" Type="Self.SALDO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ABONO">
+              <PropertyRef Name="IdAbono" />
+            </Principal>
+            <Dependent Role="SALDO">
+              <PropertyRef Name="IdAbono" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SALDO__IdFactura__44FF419A">
+          <End Role="FACTURA" Type="Self.FACTURA" Multiplicity="0..1" />
+          <End Role="SALDO" Type="Self.SALDO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FACTURA">
+              <PropertyRef Name="IdFactura" />
+            </Principal>
+            <Dependent Role="SALDO">
+              <PropertyRef Name="IdFactura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SALDO__IdMonto__45F365D3">
+          <End Role="MONTOCREDITO" Type="Self.MONTOCREDITO" Multiplicity="0..1" />
+          <End Role="SALDO" Type="Self.SALDO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MONTOCREDITO">
+              <PropertyRef Name="IdMonto" />
+            </Principal>
+            <Dependent Role="SALDO">
+              <PropertyRef Name="IdMonto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="pruebaModelStoreContainer">
+          <EntitySet Name="ABONO" EntityType="Self.ABONO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CREDITO" EntityType="Self.CREDITO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DETALLEFACTURA" EntityType="Self.DETALLEFACTURA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ESTADOCREDITO" EntityType="Self.ESTADOCREDITO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FACTURA" EntityType="Self.FACTURA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MONTOCREDITO" EntityType="Self.MONTOCREDITO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRODUCTO" EntityType="Self.PRODUCTO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RECIBOCAJA" EntityType="Self.RECIBOCAJA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SALDO" EntityType="Self.SALDO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TIPOCLIENTE" EntityType="Self.TIPOCLIENTE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TIPOPAGO" EntityType="Self.TIPOPAGO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__ABONO__IdCredito__4316F928" Association="Self.FK__ABONO__IdCredito__4316F928">
+            <End Role="CREDITO" EntitySet="CREDITO" />
+            <End Role="ABONO" EntitySet="ABONO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ABONO__IdFactura__440B1D61" Association="Self.FK__ABONO__IdFactura__440B1D61">
+            <End Role="FACTURA" EntitySet="FACTURA" />
+            <End Role="ABONO" EntitySet="ABONO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CLIENTE__IdTipoC__3B75D760" Association="Self.FK__CLIENTE__IdTipoC__3B75D760">
+            <End Role="TIPOCLIENTE" EntitySet="TIPOCLIENTE" />
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CREDITO__IdClien__412EB0B6" Association="Self.FK__CREDITO__IdClien__412EB0B6">
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+            <End Role="CREDITO" EntitySet="CREDITO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CREDITO__IdEstad__403A8C7D" Association="Self.FK__CREDITO__IdEstad__403A8C7D">
+            <End Role="ESTADOCREDITO" EntitySet="ESTADOCREDITO" />
+            <End Role="CREDITO" EntitySet="CREDITO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DETALLEFA__IdFac__3E52440B" Association="Self.FK__DETALLEFA__IdFac__3E52440B">
+            <End Role="FACTURA" EntitySet="FACTURA" />
+            <End Role="DETALLEFACTURA" EntitySet="DETALLEFACTURA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DETALLEFA__IdPro__3F466844" Association="Self.FK__DETALLEFA__IdPro__3F466844">
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+            <End Role="DETALLEFACTURA" EntitySet="DETALLEFACTURA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FACTURA__IdClien__3D5E1FD2" Association="Self.FK__FACTURA__IdClien__3D5E1FD2">
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+            <End Role="FACTURA" EntitySet="FACTURA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FACTURA__IdTipoP__3C69FB99" Association="Self.FK__FACTURA__IdTipoP__3C69FB99">
+            <End Role="TIPOPAGO" EntitySet="TIPOPAGO" />
+            <End Role="FACTURA" EntitySet="FACTURA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MONTOCRED__IdCre__4222D4EF" Association="Self.FK__MONTOCRED__IdCre__4222D4EF">
+            <End Role="CREDITO" EntitySet="CREDITO" />
+            <End Role="MONTOCREDITO" EntitySet="MONTOCREDITO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RECIBOCAJ__IdAbo__47DBAE45" Association="Self.FK__RECIBOCAJ__IdAbo__47DBAE45">
+            <End Role="ABONO" EntitySet="ABONO" />
+            <End Role="RECIBOCAJA" EntitySet="RECIBOCAJA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SALDO__IdAbono__46E78A0C" Association="Self.FK__SALDO__IdAbono__46E78A0C">
+            <End Role="ABONO" EntitySet="ABONO" />
+            <End Role="SALDO" EntitySet="SALDO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SALDO__IdFactura__44FF419A" Association="Self.FK__SALDO__IdFactura__44FF419A">
+            <End Role="FACTURA" EntitySet="FACTURA" />
+            <End Role="SALDO" EntitySet="SALDO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SALDO__IdMonto__45F365D3" Association="Self.FK__SALDO__IdMonto__45F365D3">
+            <End Role="MONTOCREDITO" EntitySet="MONTOCREDITO" />
+            <End Role="SALDO" EntitySet="SALDO" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="pruebaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ABONO">
+          <Key>
+            <PropertyRef Name="IdAbono" />
+          </Key>
+          <Property Name="IdAbono" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Monto" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" />
+          <Property Name="IdCredito" Type="Int32" />
+          <Property Name="IdFactura" Type="Int32" />
+          <NavigationProperty Name="CREDITO" Relationship="Self.FK__ABONO__IdCredito__4316F928" FromRole="ABONO" ToRole="CREDITO" />
+          <NavigationProperty Name="FACTURA" Relationship="Self.FK__ABONO__IdFactura__440B1D61" FromRole="ABONO" ToRole="FACTURA" />
+          <NavigationProperty Name="RECIBOCAJAs" Relationship="Self.FK__RECIBOCAJ__IdAbo__47DBAE45" FromRole="ABONO" ToRole="RECIBOCAJA" />
+          <NavigationProperty Name="SALDOes" Relationship="Self.FK__SALDO__IdAbono__46E78A0C" FromRole="ABONO" ToRole="SALDO" />
+        </EntityType>
+        <EntityType Name="CLIENTE">
+          <Key>
+            <PropertyRef Name="IdCliente" />
+          </Key>
+          <Property Name="IdCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="Int32" />
+          <Property Name="Nit" Type="Int32" />
+          <Property Name="IdTipoCliente" Type="Int32" />
+          <NavigationProperty Name="TIPOCLIENTE" Relationship="Self.FK__CLIENTE__IdTipoC__3B75D760" FromRole="CLIENTE" ToRole="TIPOCLIENTE" />
+          <NavigationProperty Name="CREDITOes" Relationship="Self.FK__CREDITO__IdClien__412EB0B6" FromRole="CLIENTE" ToRole="CREDITO" />
+          <NavigationProperty Name="FACTURAs" Relationship="Self.FK__FACTURA__IdClien__3D5E1FD2" FromRole="CLIENTE" ToRole="FACTURA" />
+        </EntityType>
+        <EntityType Name="CREDITO">
+          <Key>
+            <PropertyRef Name="IdCredito" />
+          </Key>
+          <Property Name="IdCredito" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdEstado" Type="Int32" />
+          <Property Name="Detalle" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" />
+          <Property Name="IdCliente" Type="Int32" />
+          <NavigationProperty Name="ABONOes" Relationship="Self.FK__ABONO__IdCredito__4316F928" FromRole="CREDITO" ToRole="ABONO" />
+          <NavigationProperty Name="CLIENTE" Relationship="Self.FK__CREDITO__IdClien__412EB0B6" FromRole="CREDITO" ToRole="CLIENTE" />
+          <NavigationProperty Name="ESTADOCREDITO" Relationship="Self.FK__CREDITO__IdEstad__403A8C7D" FromRole="CREDITO" ToRole="ESTADOCREDITO" />
+          <NavigationProperty Name="MONTOCREDITOes" Relationship="Self.FK__MONTOCRED__IdCre__4222D4EF" FromRole="CREDITO" ToRole="MONTOCREDITO" />
+        </EntityType>
+        <EntityType Name="DETALLEFACTURA">
+          <Key>
+            <PropertyRef Name="IdDetalle" />
+          </Key>
+          <Property Name="IdDetalle" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdFactura" Type="Int32" />
+          <Property Name="IdProducto" Type="Int32" />
+          <Property Name="CantidadProducto" Type="Int32" />
+          <NavigationProperty Name="FACTURA" Relationship="Self.FK__DETALLEFA__IdFac__3E52440B" FromRole="DETALLEFACTURA" ToRole="FACTURA" />
+          <NavigationProperty Name="PRODUCTO" Relationship="Self.FK__DETALLEFA__IdPro__3F466844" FromRole="DETALLEFACTURA" ToRole="PRODUCTO" />
+        </EntityType>
+        <EntityType Name="ESTADOCREDITO">
+          <Key>
+            <PropertyRef Name="IdEstado" />
+          </Key>
+          <Property Name="IdEstado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Estado" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CREDITOes" Relationship="Self.FK__CREDITO__IdEstad__403A8C7D" FromRole="ESTADOCREDITO" ToRole="CREDITO" />
+        </EntityType>
+        <EntityType Name="FACTURA">
+          <Key>
+            <PropertyRef Name="IdFactura" />
+          </Key>
+          <Property Name="IdFactura" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdTipoPago" Type="Int32" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" />
+          <Property Name="Total" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="IdCliente" Type="Int32" />
+          <NavigationProperty Name="ABONOes" Relationship="Self.FK__ABONO__IdFactura__440B1D61" FromRole="FACTURA" ToRole="ABONO" />
+          <NavigationProperty Name="CLIENTE" Relationship="Self.FK__FACTURA__IdClien__3D5E1FD2" FromRole="FACTURA" ToRole="CLIENTE" />
+          <NavigationProperty Name="DETALLEFACTURAs" Relationship="Self.FK__DETALLEFA__IdFac__3E52440B" FromRole="FACTURA" ToRole="DETALLEFACTURA" />
+          <NavigationProperty Name="TIPOPAGO" Relationship="Self.FK__FACTURA__IdTipoP__3C69FB99" FromRole="FACTURA" ToRole="TIPOPAGO" />
+          <NavigationProperty Name="SALDOes" Relationship="Self.FK__SALDO__IdFactura__44FF419A" FromRole="FACTURA" ToRole="SALDO" />
+        </EntityType>
+        <EntityType Name="MONTOCREDITO">
+          <Key>
+            <PropertyRef Name="IdMonto" />
+          </Key>
+          <Property Name="IdMonto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Monto" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="IdCredito" Type="Int32" />
+          <NavigationProperty Name="CREDITO" Relationship="Self.FK__MONTOCRED__IdCre__4222D4EF" FromRole="MONTOCREDITO" ToRole="CREDITO" />
+          <NavigationProperty Name="SALDOes" Relationship="Self.FK__SALDO__IdMonto__45F365D3" FromRole="MONTOCREDITO" ToRole="SALDO" />
+        </EntityType>
+        <EntityType Name="PRODUCTO">
+          <Key>
+            <PropertyRef Name="IdProducto" />
+          </Key>
+          <Property Name="IdProducto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Cantidad" Type="Int32" />
+          <Property Name="Precio" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="DETALLEFACTURAs" Relationship="Self.FK__DETALLEFA__IdPro__3F466844" FromRole="PRODUCTO" ToRole="DETALLEFACTURA" />
+        </EntityType>
+        <EntityType Name="RECIBOCAJA">
+          <Key>
+            <PropertyRef Name="IdRecibo" />
+          </Key>
+          <Property Name="IdRecibo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Monto" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" />
+          <Property Name="IdAbono" Type="Int32" />
+          <NavigationProperty Name="ABONO" Relationship="Self.FK__RECIBOCAJ__IdAbo__47DBAE45" FromRole="RECIBOCAJA" ToRole="ABONO" />
+        </EntityType>
+        <EntityType Name="SALDO">
+          <Key>
+            <PropertyRef Name="IdSaldo" />
+          </Key>
+          <Property Name="IdSaldo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Monto" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="IdMonto" Type="Int32" />
+          <Property Name="IdFactura" Type="Int32" />
+          <Property Name="IdAbono" Type="Int32" />
+          <NavigationProperty Name="ABONO" Relationship="Self.FK__SALDO__IdAbono__46E78A0C" FromRole="SALDO" ToRole="ABONO" />
+          <NavigationProperty Name="FACTURA" Relationship="Self.FK__SALDO__IdFactura__44FF419A" FromRole="SALDO" ToRole="FACTURA" />
+          <NavigationProperty Name="MONTOCREDITO" Relationship="Self.FK__SALDO__IdMonto__45F365D3" FromRole="SALDO" ToRole="MONTOCREDITO" />
+        </EntityType>
+        <EntityType Name="TIPOCLIENTE">
+          <Key>
+            <PropertyRef Name="IdTipoCliente" />
+          </Key>
+          <Property Name="IdTipoCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TipoCliente1" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CLIENTEs" Relationship="Self.FK__CLIENTE__IdTipoC__3B75D760" FromRole="TIPOCLIENTE" ToRole="CLIENTE" />
+        </EntityType>
+        <EntityType Name="TIPOPAGO">
+          <Key>
+            <PropertyRef Name="IdTipoPago" />
+          </Key>
+          <Property Name="IdTipoPago" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TipoPago1" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="FACTURAs" Relationship="Self.FK__FACTURA__IdTipoP__3C69FB99" FromRole="TIPOPAGO" ToRole="FACTURA" />
+        </EntityType>
+        <EntityType Name="USUARIO">
+          <Key>
+            <PropertyRef Name="IdUser" />
+          </Key>
+          <Property Name="IdUser" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="Int32" />
+          <Property Name="Puesto" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="UserName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK__ABONO__IdCredito__4316F928">
+          <End Role="CREDITO" Type="Self.CREDITO" Multiplicity="0..1" />
+          <End Role="ABONO" Type="Self.ABONO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CREDITO">
+              <PropertyRef Name="IdCredito" />
+            </Principal>
+            <Dependent Role="ABONO">
+              <PropertyRef Name="IdCredito" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ABONO__IdFactura__440B1D61">
+          <End Role="FACTURA" Type="Self.FACTURA" Multiplicity="0..1" />
+          <End Role="ABONO" Type="Self.ABONO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FACTURA">
+              <PropertyRef Name="IdFactura" />
+            </Principal>
+            <Dependent Role="ABONO">
+              <PropertyRef Name="IdFactura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RECIBOCAJ__IdAbo__47DBAE45">
+          <End Role="ABONO" Type="Self.ABONO" Multiplicity="0..1" />
+          <End Role="RECIBOCAJA" Type="Self.RECIBOCAJA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ABONO">
+              <PropertyRef Name="IdAbono" />
+            </Principal>
+            <Dependent Role="RECIBOCAJA">
+              <PropertyRef Name="IdAbono" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SALDO__IdAbono__46E78A0C">
+          <End Role="ABONO" Type="Self.ABONO" Multiplicity="0..1" />
+          <End Role="SALDO" Type="Self.SALDO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ABONO">
+              <PropertyRef Name="IdAbono" />
+            </Principal>
+            <Dependent Role="SALDO">
+              <PropertyRef Name="IdAbono" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CLIENTE__IdTipoC__3B75D760">
+          <End Role="TIPOCLIENTE" Type="Self.TIPOCLIENTE" Multiplicity="0..1" />
+          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPOCLIENTE">
+              <PropertyRef Name="IdTipoCliente" />
+            </Principal>
+            <Dependent Role="CLIENTE">
+              <PropertyRef Name="IdTipoCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CREDITO__IdClien__412EB0B6">
+          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="0..1" />
+          <End Role="CREDITO" Type="Self.CREDITO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="CREDITO">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FACTURA__IdClien__3D5E1FD2">
+          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="0..1" />
+          <End Role="FACTURA" Type="Self.FACTURA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="FACTURA">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CREDITO__IdEstad__403A8C7D">
+          <End Role="ESTADOCREDITO" Type="Self.ESTADOCREDITO" Multiplicity="0..1" />
+          <End Role="CREDITO" Type="Self.CREDITO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTADOCREDITO">
+              <PropertyRef Name="IdEstado" />
+            </Principal>
+            <Dependent Role="CREDITO">
+              <PropertyRef Name="IdEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MONTOCRED__IdCre__4222D4EF">
+          <End Role="CREDITO" Type="Self.CREDITO" Multiplicity="0..1" />
+          <End Role="MONTOCREDITO" Type="Self.MONTOCREDITO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CREDITO">
+              <PropertyRef Name="IdCredito" />
+            </Principal>
+            <Dependent Role="MONTOCREDITO">
+              <PropertyRef Name="IdCredito" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DETALLEFA__IdFac__3E52440B">
+          <End Role="FACTURA" Type="Self.FACTURA" Multiplicity="0..1" />
+          <End Role="DETALLEFACTURA" Type="Self.DETALLEFACTURA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FACTURA">
+              <PropertyRef Name="IdFactura" />
+            </Principal>
+            <Dependent Role="DETALLEFACTURA">
+              <PropertyRef Name="IdFactura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DETALLEFA__IdPro__3F466844">
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="0..1" />
+          <End Role="DETALLEFACTURA" Type="Self.DETALLEFACTURA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTO">
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="DETALLEFACTURA">
+              <PropertyRef Name="IdProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FACTURA__IdTipoP__3C69FB99">
+          <End Role="TIPOPAGO" Type="Self.TIPOPAGO" Multiplicity="0..1" />
+          <End Role="FACTURA" Type="Self.FACTURA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPOPAGO">
+              <PropertyRef Name="IdTipoPago" />
+            </Principal>
+            <Dependent Role="FACTURA">
+              <PropertyRef Name="IdTipoPago" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SALDO__IdFactura__44FF419A">
+          <End Role="FACTURA" Type="Self.FACTURA" Multiplicity="0..1" />
+          <End Role="SALDO" Type="Self.SALDO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FACTURA">
+              <PropertyRef Name="IdFactura" />
+            </Principal>
+            <Dependent Role="SALDO">
+              <PropertyRef Name="IdFactura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SALDO__IdMonto__45F365D3">
+          <End Role="MONTOCREDITO" Type="Self.MONTOCREDITO" Multiplicity="0..1" />
+          <End Role="SALDO" Type="Self.SALDO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MONTOCREDITO">
+              <PropertyRef Name="IdMonto" />
+            </Principal>
+            <Dependent Role="SALDO">
+              <PropertyRef Name="IdMonto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="pruebaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ABONOes" EntityType="Self.ABONO" />
+          <EntitySet Name="CLIENTEs" EntityType="Self.CLIENTE" />
+          <EntitySet Name="CREDITOes" EntityType="Self.CREDITO" />
+          <EntitySet Name="DETALLEFACTURAs" EntityType="Self.DETALLEFACTURA" />
+          <EntitySet Name="ESTADOCREDITOes" EntityType="Self.ESTADOCREDITO" />
+          <EntitySet Name="FACTURAs" EntityType="Self.FACTURA" />
+          <EntitySet Name="MONTOCREDITOes" EntityType="Self.MONTOCREDITO" />
+          <EntitySet Name="PRODUCTOes" EntityType="Self.PRODUCTO" />
+          <EntitySet Name="RECIBOCAJAs" EntityType="Self.RECIBOCAJA" />
+          <EntitySet Name="SALDOes" EntityType="Self.SALDO" />
+          <EntitySet Name="TIPOCLIENTEs" EntityType="Self.TIPOCLIENTE" />
+          <EntitySet Name="TIPOPAGOes" EntityType="Self.TIPOPAGO" />
+          <EntitySet Name="USUARIOs" EntityType="Self.USUARIO" />
+          <AssociationSet Name="FK__ABONO__IdCredito__4316F928" Association="Self.FK__ABONO__IdCredito__4316F928">
+            <End Role="CREDITO" EntitySet="CREDITOes" />
+            <End Role="ABONO" EntitySet="ABONOes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ABONO__IdFactura__440B1D61" Association="Self.FK__ABONO__IdFactura__440B1D61">
+            <End Role="FACTURA" EntitySet="FACTURAs" />
+            <End Role="ABONO" EntitySet="ABONOes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RECIBOCAJ__IdAbo__47DBAE45" Association="Self.FK__RECIBOCAJ__IdAbo__47DBAE45">
+            <End Role="ABONO" EntitySet="ABONOes" />
+            <End Role="RECIBOCAJA" EntitySet="RECIBOCAJAs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SALDO__IdAbono__46E78A0C" Association="Self.FK__SALDO__IdAbono__46E78A0C">
+            <End Role="ABONO" EntitySet="ABONOes" />
+            <End Role="SALDO" EntitySet="SALDOes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CLIENTE__IdTipoC__3B75D760" Association="Self.FK__CLIENTE__IdTipoC__3B75D760">
+            <End Role="TIPOCLIENTE" EntitySet="TIPOCLIENTEs" />
+            <End Role="CLIENTE" EntitySet="CLIENTEs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CREDITO__IdClien__412EB0B6" Association="Self.FK__CREDITO__IdClien__412EB0B6">
+            <End Role="CLIENTE" EntitySet="CLIENTEs" />
+            <End Role="CREDITO" EntitySet="CREDITOes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FACTURA__IdClien__3D5E1FD2" Association="Self.FK__FACTURA__IdClien__3D5E1FD2">
+            <End Role="CLIENTE" EntitySet="CLIENTEs" />
+            <End Role="FACTURA" EntitySet="FACTURAs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CREDITO__IdEstad__403A8C7D" Association="Self.FK__CREDITO__IdEstad__403A8C7D">
+            <End Role="ESTADOCREDITO" EntitySet="ESTADOCREDITOes" />
+            <End Role="CREDITO" EntitySet="CREDITOes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MONTOCRED__IdCre__4222D4EF" Association="Self.FK__MONTOCRED__IdCre__4222D4EF">
+            <End Role="CREDITO" EntitySet="CREDITOes" />
+            <End Role="MONTOCREDITO" EntitySet="MONTOCREDITOes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DETALLEFA__IdFac__3E52440B" Association="Self.FK__DETALLEFA__IdFac__3E52440B">
+            <End Role="FACTURA" EntitySet="FACTURAs" />
+            <End Role="DETALLEFACTURA" EntitySet="DETALLEFACTURAs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DETALLEFA__IdPro__3F466844" Association="Self.FK__DETALLEFA__IdPro__3F466844">
+            <End Role="PRODUCTO" EntitySet="PRODUCTOes" />
+            <End Role="DETALLEFACTURA" EntitySet="DETALLEFACTURAs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FACTURA__IdTipoP__3C69FB99" Association="Self.FK__FACTURA__IdTipoP__3C69FB99">
+            <End Role="TIPOPAGO" EntitySet="TIPOPAGOes" />
+            <End Role="FACTURA" EntitySet="FACTURAs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SALDO__IdFactura__44FF419A" Association="Self.FK__SALDO__IdFactura__44FF419A">
+            <End Role="FACTURA" EntitySet="FACTURAs" />
+            <End Role="SALDO" EntitySet="SALDOes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SALDO__IdMonto__45F365D3" Association="Self.FK__SALDO__IdMonto__45F365D3">
+            <End Role="MONTOCREDITO" EntitySet="MONTOCREDITOes" />
+            <End Role="SALDO" EntitySet="SALDOes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="pruebaModelStoreContainer" CdmEntityContainer="pruebaEntities">
+          <EntitySetMapping Name="ABONOes">
+            <EntityTypeMapping TypeName="pruebaModel.ABONO">
+              <MappingFragment StoreEntitySet="ABONO">
+                <ScalarProperty Name="IdAbono" ColumnName="IdAbono" />
+                <ScalarProperty Name="Monto" ColumnName="Monto" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="IdCredito" ColumnName="IdCredito" />
+                <ScalarProperty Name="IdFactura" ColumnName="IdFactura" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CLIENTEs">
+            <EntityTypeMapping TypeName="pruebaModel.CLIENTE">
+              <MappingFragment StoreEntitySet="CLIENTE">
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Nit" ColumnName="Nit" />
+                <ScalarProperty Name="IdTipoCliente" ColumnName="IdTipoCliente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CREDITOes">
+            <EntityTypeMapping TypeName="pruebaModel.CREDITO">
+              <MappingFragment StoreEntitySet="CREDITO">
+                <ScalarProperty Name="IdCredito" ColumnName="IdCredito" />
+                <ScalarProperty Name="IdEstado" ColumnName="IdEstado" />
+                <ScalarProperty Name="Detalle" ColumnName="Detalle" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DETALLEFACTURAs">
+            <EntityTypeMapping TypeName="pruebaModel.DETALLEFACTURA">
+              <MappingFragment StoreEntitySet="DETALLEFACTURA">
+                <ScalarProperty Name="IdDetalle" ColumnName="IdDetalle" />
+                <ScalarProperty Name="IdFactura" ColumnName="IdFactura" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="CantidadProducto" ColumnName="CantidadProducto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ESTADOCREDITOes">
+            <EntityTypeMapping TypeName="pruebaModel.ESTADOCREDITO">
+              <MappingFragment StoreEntitySet="ESTADOCREDITO">
+                <ScalarProperty Name="IdEstado" ColumnName="IdEstado" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FACTURAs">
+            <EntityTypeMapping TypeName="pruebaModel.FACTURA">
+              <MappingFragment StoreEntitySet="FACTURA">
+                <ScalarProperty Name="IdFactura" ColumnName="IdFactura" />
+                <ScalarProperty Name="IdTipoPago" ColumnName="IdTipoPago" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MONTOCREDITOes">
+            <EntityTypeMapping TypeName="pruebaModel.MONTOCREDITO">
+              <MappingFragment StoreEntitySet="MONTOCREDITO">
+                <ScalarProperty Name="IdMonto" ColumnName="IdMonto" />
+                <ScalarProperty Name="Monto" ColumnName="Monto" />
+                <ScalarProperty Name="IdCredito" ColumnName="IdCredito" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRODUCTOes">
+            <EntityTypeMapping TypeName="pruebaModel.PRODUCTO">
+              <MappingFragment StoreEntitySet="PRODUCTO">
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RECIBOCAJAs">
+            <EntityTypeMapping TypeName="pruebaModel.RECIBOCAJA">
+              <MappingFragment StoreEntitySet="RECIBOCAJA">
+                <ScalarProperty Name="IdRecibo" ColumnName="IdRecibo" />
+                <ScalarProperty Name="Monto" ColumnName="Monto" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="IdAbono" ColumnName="IdAbono" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SALDOes">
+            <EntityTypeMapping TypeName="pruebaModel.SALDO">
+              <MappingFragment StoreEntitySet="SALDO">
+                <ScalarProperty Name="IdSaldo" ColumnName="IdSaldo" />
+                <ScalarProperty Name="Monto" ColumnName="Monto" />
+                <ScalarProperty Name="IdMonto" ColumnName="IdMonto" />
+                <ScalarProperty Name="IdFactura" ColumnName="IdFactura" />
+                <ScalarProperty Name="IdAbono" ColumnName="IdAbono" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TIPOCLIENTEs">
+            <EntityTypeMapping TypeName="pruebaModel.TIPOCLIENTE">
+              <MappingFragment StoreEntitySet="TIPOCLIENTE">
+                <ScalarProperty Name="IdTipoCliente" ColumnName="IdTipoCliente" />
+                <ScalarProperty Name="TipoCliente1" ColumnName="TipoCliente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TIPOPAGOes">
+            <EntityTypeMapping TypeName="pruebaModel.TIPOPAGO">
+              <MappingFragment StoreEntitySet="TIPOPAGO">
+                <ScalarProperty Name="IdTipoPago" ColumnName="IdTipoPago" />
+                <ScalarProperty Name="TipoPago1" ColumnName="TipoPago" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USUARIOs">
+            <EntityTypeMapping TypeName="pruebaModel.USUARIO">
+              <MappingFragment StoreEntitySet="USUARIO">
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Puesto" ColumnName="Puesto" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

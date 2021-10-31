@@ -1,0 +1,50 @@
+﻿@model CuentasFinal.Models.FACTURA
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Detalles</h2>
+
+<div>
+    <h4>FACTURA</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fecha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Total)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Total)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CLIENTE.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CLIENTE.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TIPOPAGO.TipoPago1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TIPOPAGO.TipoPago1)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.IdFactura }) |
+    @Html.ActionLink("Regresar", "Index")
+</p>

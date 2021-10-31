@@ -1,0 +1,52 @@
+﻿@model IEnumerable<CuentasFinal.Models.ABONO>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<img src="~/Scripts/logo.jpg" width="200"
+     >
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-dark table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Monto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CREDITO.Detalle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FACTURA.IdFactura)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Monto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fecha)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CREDITO.Detalle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FACTURA.IdFactura)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.IdAbono }) |
+            @Html.ActionLink("Detalles", "Details", new { id=item.IdAbono }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.IdAbono })
+        </td>
+    </tr>
+}
+
+</table>
